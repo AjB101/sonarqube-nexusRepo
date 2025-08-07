@@ -1,12 +1,18 @@
+
 pipeline {
-    agent any    
-stages {   
+    agent any
+ environment {
+      MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"   
+    }     
+
+    stages {   
         stage('Build with maven') {
             steps {
                 sh 'cd SampleWebApp && mvn clean install'
             }
         }
-        stage('Test') {
+        
+             stage('Test') {
             steps {
                 sh 'cd SampleWebApp && mvn test'
             }
@@ -18,7 +24,7 @@ stages {
                   withSonarQubeEnv('sonar_scanner') {
  
 
-            sh "mvn -f SampleWebApp/pom.xml sonar:sonar"      
+             sh "mvn -f SampleWebApp/pom.xml sonar:sonar"      
                }
             }
        }
