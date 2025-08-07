@@ -1,23 +1,18 @@
 pipeline {
     agent any
-   
-   
-
-    stages {   
+   stages {   
         stage('Build with maven') {
             steps {
                 sh 'cd SampleWebApp && mvn clean install'
             }
         }
-        
-             stage('Test') {
+        stage('Test') {
             steps {
                 sh 'cd SampleWebApp && mvn test'
             }
         
             }
     
-            
-        }
+             }
 } 
 
